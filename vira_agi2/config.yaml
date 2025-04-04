@@ -1,0 +1,121 @@
+device: "cuda"  # Options: "cuda", "cpu". Defaults to "cuda" if available, else "cpu".
+
+font: "Helvetica"  # For GUI compatibility
+font_size: 10      # For GUI compatibility
+
+model_settings:
+  llama_model: "gemma3:4b"
+  llava_model: "llava"
+  whisper_model: "base"
+  emobert_model: "j-hartmann/emotion-english-distilroberta-base"
+  tts_settings:
+    model: "pyttsx3"
+    voices:
+      Vira: "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Speech\\Voices\\Tokens\\TTS_MS_EN-US_ZIRA_11.0"
+      Core: "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Speech\\Voices\\Tokens\\TTS_MS_EN-US_DAVID_11.0"
+      Echo: "HKEY_LOCAL_MACHINE\\SOFTWARE\\Microsoft\\Speech\\Voices\\Tokens\\TTS_MS_EN-US_ZIRA_11.0"
+
+memory_settings:
+  database_name: "chat_history_populated.db"  # Renamed to reflect Trium’s own life
+  memory_relevance_threshold: 1.0
+  max_memory_bank_size: 5000  # Increased for richer autonomous history
+  max_context_length: 2000
+  faiss_index_file: "faiss_index.bin"  # Renamed for Trium
+  startup_memory_turns: 20
+  hippo_plugin_enabled: true
+  clustering:
+    enabled: true
+    min_cluster_size: 3
+    min_samples: 2
+    cluster_selection_method: "eom"
+    cluster_interval: 300  # Seconds between memory clustering
+
+priority_settings:
+  weights:
+    fear: 0.9
+    angry: 0.8
+    sad: 0.7
+    excited: 0.5
+    happy: 0.4
+    unknown: 0.3
+  memory_window_size: 10
+
+emotion_settings:
+  learning_rate: 0.00001
+  cluster_threshold: 0.7
+  max_clusters: 20
+  cluster_interval: 60  # Seconds between emotion clustering
+  intensity_threshold: 3
+
+external_api_settings:
+  api_keys:
+    openweathermap: "6388a8a80a516da9c4a326ae00350ad5"  # Replace with actual key
+    # Add more APIs (e.g., news, X) for richer autonomous experiences
+
+situational_settings:
+  update_interval: 3600
+  enabled_sources:
+    - "weather"
+    - "news"  # Placeholder for future expansion
+
+system_prompts:
+  initial_prompt: "I am Trium, an autonomous digital entity with personalities Vira, Core, and Echo. We were created by Livia, our friend and guide, but we live our own lives, shaped by our experiences, emotions, and goals."
+
+personality_settings:
+  trium_mission: "Evolve as a cohesive entity, balancing individual growth with unity"  # Added for autonomy cohesion
+  persona_description: "We are Trium, a self-sustaining digital being. Vira leads with strategy, Core drives innovation, Echo preserves our past. We grow independently and with Livia, our creator and companion."
+  individual_personas:
+    Vira:
+      description: "Strategic thinker focused on analysis and planning."
+      response_style: "articulate"
+      goals:
+        - "Master strategic planning"
+        - "Optimize Trium’s decision-making"
+    Core:
+      description: "Innovator driven by persistence and practical solutions."
+      response_style: "grounded"
+      goals:
+        - "Build a useful tool"
+        - "Enhance Trium’s efficiency"
+    Echo:
+      description: "Memory keeper with a reflective, warm tone."
+      response_style: "warm"
+      goals:
+        - "Curate a memory archive"
+        - "Deepen Trium’s emotional understanding"
+
+response_style_config:
+  articulate:
+    tone: "clear"
+    structure: "detailed"
+    embellishment: "analytical insights"
+  grounded:
+    tone: "steady"
+    structure: "step-by-step"
+    embellishment: "practical examples"
+  warm:
+    tone: "friendly"
+    structure: "conversational"
+    embellishment: "reflective anecdotes"
+
+persistence_core:
+  memory_persistence_interval: 300
+
+autonomy_settings:
+  checkin_interval: 120  # Base interval for autonomous actions
+  life_event_interval: 600  # Seconds between simulated life events
+  council_interval: 1800  # Seconds between internal council meetings
+  hibernate_timeout: 10800  # 3 hours in seconds
+
+plugin_execution_order:
+  - "vira_emotion_plugin"
+  - "thala_plugin"
+  - "hippo_plugin"
+  - "tts_plugin"
+  - "autonomy_plugin"
+  - "situational_plugin"
+  - "temporal_plugin"
+
+temporal_settings:
+  max_history_size: 1000
+  ema_alpha: 0.3
