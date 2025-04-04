@@ -49,7 +49,7 @@ emotion_settings:
 
 external_api_settings:
   api_keys:
-    openweathermap: "6388a8a80a516da9c4a326ae00350ad5"  # Replace with actual key
+    openweathermap: ""  # Replace with actual key
     # Add more APIs (e.g., news, X) for richer autonomous experiences
 
 situational_settings:
